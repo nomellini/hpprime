@@ -1,0 +1,46 @@
+#pragma mode( separator(.,;) integer(h32) )
+
+//  Este programa gera a reta tangente no App Function (ou algum derivado)
+//  Coloque sua função em F1, entre em Plot, navegue até o ponto X desejado.
+//  entre em View e selecione "Tangent Line".
+//  
+//  Equação da reta y = a*x + b
+//
+//  a = Slope no ponto desejado
+//  x e y são o ponto desejado, a reta deve passar pelo ponto (x,y)
+//  onde Y = F1(X)
+//  
+//  calculemos b = y - a*x
+//  
+//  Colocamos a função F2(X) = a*x+b;
+//  
+//  Criamos uma literal a partir de uma string
+//  
+//  String = " 'a*X+b' "; 
+//  onde a = SLOPE (Chamei de s) e b = F1(X) - s*X;
+//  
+//  local F := "'" + s + "*X+" + b + "'"; // Isso é uma Sting
+//  F2 := expr(F) ; // F2 é uma equação, que veio da expressão algébrica 'expressão' extraida da string com expr()
+//  
+//  CHECK(2) marca a F2 para ser desenhada
+//  startview(1,1) exibe a tela Plot  
+
+
+ssVersao := "Linha tangente  1.000\nby Fernando Nomellini";
+
+Info()
+BEGIN
+ MSGBOX(ssVersao);
+END;
+
+
+VIEW "Tangent Line on F2", Views()
+BEGIN
+  local x := X;
+  local s = SLOPE(F1,x);
+  local b = F1(x)- s * x;
+  local F := "'" + s + "*X+" + b + "'";
+  F2 := expr(F);
+  CHECK(2);
+  startview(1,1)
+END;
